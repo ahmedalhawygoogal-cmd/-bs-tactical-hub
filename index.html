@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز الفعاليات التكتيكية - BS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- القائمة الجانبية (Sidebar) -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>القائمة الرئيسية</h3>
+            <button class="icon-btn" id="close-sidebar">&times;</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="https://discord.gg" target="_blank" class="sidebar-link">
+                    <span>💡</span> اقتراح فكرة روم جديدة
+                </a>
+            </li>
+            <li>
+                <a href="https://discord.gg" target="_blank" class="sidebar-link">
+                    <span>💬</span> انضم لمجتمعنا (الديسكورد / الكلان)
+                </a>
+            </li>
+            <li>
+                <button class="sidebar-link btn-action" id="share-site-btn">
+                    <span>🔗</span> مشاركة الموقع
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- الهيدر العلوي -->
+    <header class="top-header">
+        <div class="header-left">
+            <button class="icon-btn" id="menu-btn">☰</button>
+            <button class="icon-btn" id="notif-btn">🔔</button>
+        </div>
+        <div class="header-right">
+            <span class="header-title">مكتبة الفعاليات</span>
+            <div class="logo-badge">BS</div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-container">
+        
+        <section id="view-events" class="page-view active">
+            <div class="hero-section">
+                <div class="brand-pill">BS EVENTS HUB 🎯</div>
+                <h1 class="hero-title">منصة الفعاليات التكتيكية</h1>
+                <p class="hero-subtitle">تحديات ورومات خاصة بقوانين عادلة جاهزة للتطبيق</p>
+                <button class="explore-btn" onclick="scrollToEvents()">استكشف الأفكار ↓</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h2 id="visitors-count">0</h2>
+                    <p>👥 الزوار</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="total-events">0</h2>
+                    <p>🏆 أفكار الرومات</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="ready-events">0</h2>
+                    <p>🟢 جاهزة للعب</p>
+                </div>
+            </div>
+
+            <div class="section-header" id="events-anchor">
+                <h2>تحديد الوضع</h2>
+                <p>اختر وضع اللعبة لعرض الأفكار المناسبة له</p>
+            </div>
+
+            <!-- شريط كروت الأوضاع الأفقي المصور -->
+            <div class="modes-filter-bar" id="modes-container">
+                <!-- الكروت تُحمل هنا ديناميكياً -->
+            </div>
+
+            <div class="section-header" style="margin-top: 30px;">
+                <h2>أفكار الفعاليات والتحديات</h2>
+                <p>استعرض الأفكار واختر المناسب لكلانك</p>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-filter="all">الكل</button>
+                <button class="tab-btn" data-filter="ready">🟢 جاهزة</button>
+                <button class="tab-btn" data-filter="upcoming">🟡 فكرة قادمة</button>
+            </div>
+
+            <div class="events-list" id="events-container">
+                <!-- الفعاليات تُحمل هنا -->
+            </div>
+        </section>
+
+        <!-- قسم الدستور والقوانين العامة -->
+        <section id="view-rules" class="page-view">
+            <div class="section-header">
+                <h2>📜 الدستور الموحد للرومات</h2>
+                <p>اللوائح العامة الشاملة لجميع المنافسات والمنظمين</p>
+            </div>
+            <div id="rules-container" class="rules-list"></div>
+        </section>
+
+        <!-- قسم الأفضل -->
+        <section id="view-top-ideas" class="page-view">
+            <div class="section-header">
+                <h2>🔥 الأكثر طلبًا واستخداماً</h2>
+                <p>أفكار الفعاليات الأكثر شعبية وتفضيلًا بين اللاعبين</p>
+            </div>
+            <div id="top-ideas-container" class="top-ideas-list"></div>
+        </section>
+
+    </main>
+
+    <!-- النوافذ المنبثقة -->
+    <div id="event-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <div id="notif-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" id="close-notif-modal">&times;</button>
+            <h3 style="margin-bottom: 15px;">🔔 أحدث التحديثات والأفكار</h3>
+            <div id="notif-content" class="notif-list"></div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-target="view-events">
+            <span class="nav-icon">🎯</span>
+            <span class="nav-label">الفعاليات</span>
+        </button>
+        <button class="nav-item" data-target="view-rules">
+            <span class="nav-icon">📜</span>
+            <span class="nav-label">الدستور</span>
+        </button>
+        <button class="nav-item" data-target="view-top-ideas">
+            <span class="nav-icon">🔥</span>
+            <span class="nav-label">الأفضل</span>
+        </button>
+    </nav>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
